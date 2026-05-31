@@ -6,30 +6,37 @@ from rxconfig import config
 
 
 class State(rx.State):
-    """The app state."""
+    count: int = 0
+
+    def incrementar(self):
+        self.count += 1
+
+    def decrementar(self):
+        self.count -= 1
 
 
 def index() -> rx.Component:
-    # Welcome Page (Index)
     return rx.container(
         rx.color_mode.button(position="top-right"),
         rx.vstack(
-            rx.heading("Welcome to Reflex!", size="9"),
-            rx.text(
-                "Get started by editing ",
-                rx.code(f"{config.app_name}/{config.app_name}.py"),
-                size="5",
-            ),
-            rx.link(
-                rx.button("Check out our docs!"),
-                href="https://reflex.dev/docs/getting-started/introduction/",
-                is_external=True,
+            rx.heading("Contador Interactivo", size="7"),
+            rx.text("Aprendiendo State y Event Handlers"),
+            rx.heading(State.count, size="9", color="blue"),
+            rx.hstack(
+                rx.button("➖", on_click=State.decrementar, color_scheme="red"),
+                rx.button("➕", on_click=State.incrementar,
+                          color_scheme="green"),
+                spacing="4",
             ),
             spacing="5",
             justify="center",
-            min_height="85vh",
+            min_height="80vh",
         ),
     )
+
+
+app = rx.App()
+app.add_page(index)
 
 
 app = rx.App()
