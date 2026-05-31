@@ -1,0 +1,9 @@
+[project]
+name = "pytasks"
+version = "0.1.0"
+description = "Aplicación para lista de tareas"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "reflex>=0.9.3",
+]
